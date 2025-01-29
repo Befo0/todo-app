@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\todo;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -16,19 +15,19 @@ class TodoController extends Controller
      */
     public function index(): Response
     {
-       return Inertia::render('Todo/Index', [
-
-       ]);
+       return Inertia::render('Todo/Index');
     }
 
     /**
      * Show a list of todos.
      */
-    public function list(): Response 
+    public function list(Request $request): Response 
     {
-        return Inertia::render('Todo/List', [
+        $userId = $request->user()->id;
+        $todos = todo::all()->where('user_id', $userId);
 
-        ]);
+
+        return Inertia::render('Todo/List', compact('todos'));
     }
     /**
      * Show the form for creating a new resource.
@@ -46,13 +45,16 @@ class TodoController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:100',
             'todo' => 'required|string|max:255',
-            'date' => 'required|string',
-            'time' => 'required|string',
+            'date' => [
+                'required',
+                'date',
+                'after_or_equal:' . now()->toDateString(),
+            ],
         ]);
 
         $request->user()->todo()->create($validated);
 
-        return redirect(route('todos.list'));
+        return redirect(route('todos.index'));
     }
 
     /**

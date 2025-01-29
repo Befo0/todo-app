@@ -31,7 +31,10 @@ export default function AuthenticatedLayout({ header, children }) {
                                     Dashboard
                                 </NavLink>
                                 <NavLink href={route('todos.index')} active={route().current('todos.index')}>
-                                    To Do
+                                    Create To Do
+                                </NavLink>
+                                <NavLink href={route('todos.list')} active={route().current('todos.list')}>
+                                    List of To Do's
                                 </NavLink>
                             </div>
                         </div>
@@ -138,7 +141,10 @@ export default function AuthenticatedLayout({ header, children }) {
                             Dashboard
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('todos.index')} active={route().current('todos.index')}>
-                            To Do
+                            Create To Do
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('todos.list')} active={route().current('todos.list')}>
+                            List of To Do's
                         </ResponsiveNavLink>
                     </div>
 
