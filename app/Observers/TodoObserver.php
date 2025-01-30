@@ -7,7 +7,7 @@ use App\Models\todo;
 class TodoObserver
 {
     /**
-     * Handle the todo "creating" event.
+     * Handle the todo "created" event.
      */
     public function creating(todo $todo): void
     {
@@ -15,11 +15,11 @@ class TodoObserver
     }
 
     /**
-     * Handle the todo "updating" event.
+     * Handle the todo "updated" event.
      */
-    public function updating(todo $todo): void
+    public function updated(todo $todo): void
     {
-        $todo->state_id = 2;
+        //
     }
 
     /**
