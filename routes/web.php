@@ -28,7 +28,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/todos', [TodoController::class, 'index'])->name('todos.index');
     Route::get('/list', [TodoController::class, 'list'])->name('todos.list');
+    Route::get('/list/{todo}', [TodoController::class, 'edit'])->name('todos.edit');
     Route::post('/store', [TodoController::class, 'store'])->name('todos.store');
+    Route::patch('/update/{todo}', [TodoController::class, 'update'])->name('todos.update');
 });
 
 require __DIR__.'/auth.php';

@@ -31,14 +31,13 @@ export default function Index({ auth }) {
                 <form action="" onSubmit={handleSubmit}>
                     <div className="flex flex-col mb-4">
                         <label htmlFor="title">Titulo</label>
-                        <input type="text" id="title" className="broder-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Titulo del que hacer" value={data.title} onChange={(e) => setData('title', e.target.value)} />
+                        <input type="text" id="title" className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" placeholder="Titulo del que hacer" value={data.title} onChange={(e) => setData('title', e.target.value)} />
                         <InputError message={errors.title} className="mt-2"/>
                     </div>
-                    <textarea name="" id="" className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm h-32" placeholder="Notas..." value={data.todo} onChange={(e) => setData('todo', e.target.value)}></textarea>
+                    <textarea name="" id="" className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm h-32 resize-none" placeholder="Notas..." value={data.todo} onChange={(e) => setData('todo', e.target.value)}></textarea>
                     <InputError message={errors.todo} className="mt-2" />
-                    <p className="mt-4">Recordatorio:</p>
-                    <div className="mt-4 flex items-center gap-x-4">
-                        <label htmlFor="date">Fecha</label>
+                    <p className="mt-4">Fecha recordatorio:</p>
+                    <div className="mt-4">
                         <input type="datetime-local" name="" id="date" className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm " value={data.date} onChange={(e) => setData('date', e.target.value)} />
                     </div>
                     <InputError message={errors.date} className="mt-2" />
