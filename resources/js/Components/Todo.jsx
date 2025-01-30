@@ -35,16 +35,16 @@ export default function Todo({ todo }) {
                             ?
                             <form action="" onSubmit={handleSubmit} className='w-full'>
                                 <div className='flex flex-col'>
-                                    <input type="text" value={data.title} onChange={(e) => setData('title', e.target.value)} className='mb-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm' />
+                                    <input type="text" value={data.title} onChange={(e) => setData('title', e.target.value)} className='mb-2 form-style' />
                                     <InputError message={errors.title} className='mt-2' />
-                                    <textarea name="" id="" value={data.todo} onChange={(e) => setData('todo', e.target.value)} className='mb-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm h-32 resize-none'></textarea>
+                                    <textarea name="" id="" value={data.todo} onChange={(e) => setData('todo', e.target.value)} className='mb-2 form-style h-32 resize-none'></textarea>
                                     <InputError message={errors.todo} className='mt-2' />
                                 </div>
                                 <label htmlFor="date">Cambiar fecha de recordatorio</label>
-                                <input type="datetime-local" id='date' value={data.date} onChange={(e) => setData('date', e.target.value)} className='mb-4 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ml-6' />
+                                <input type="datetime-local" id='date' value={data.date} onChange={(e) => setData('date', e.target.value)} className='mb-4 form-style ml-6' />
                                 <InputError message={errors.date} className='mt-2' />
                                 <label htmlFor="isFinished" className='ml-10'>Marcar como finalizado</label>
-                                <input type="checkbox" id='isFinished' className='ml-4 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm'/>
+                                <input type="checkbox" id='isFinished' className='ml-4 form-style'/>
                                 <div className='flex justify-between'>
                                     <div className='flex gap-x-4'>
                                         <PrimaryButton type='submit'>Editar</PrimaryButton>
