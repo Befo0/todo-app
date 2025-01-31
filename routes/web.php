@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TodoController;
+use App\Models\todo;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,6 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/list', [TodoController::class, 'list'])->name('todos.list');
     Route::post('/store', [TodoController::class, 'store'])->name('todos.store');
     Route::patch('/update/{todo}', [TodoController::class, 'update'])->name('todos.update');
+    Route::delete('/delete/{todo}', [TodoController::class, 'destroy'])->name('todos.delete');
 });
 
 require __DIR__.'/auth.php';

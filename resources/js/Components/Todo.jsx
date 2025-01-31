@@ -8,13 +8,13 @@ import SecondaryButton from './SecondaryButton'
 import DangerButton from './DangerButton'
 import InputError from './InputError'
 import { Toaster, toast } from 'sonner'
+import DeleteDialog from './DeleteDialog'
 
 dayjs.extend(relativeTime)
 
 export default function Todo({ todo }) {
 
-
-    const { data, setData, patch, processing, clearErrors, errors, reset } = useForm({
+    const { data, setData, patch, clearErrors, errors, reset } = useForm({
         title: todo.title,
         todo: todo.todo,
         date: todo.date,
@@ -61,9 +61,7 @@ export default function Todo({ todo }) {
                                         <PrimaryButton type='submit'>Editar</PrimaryButton>
                                         <SecondaryButton onClick={() => { setEditing(false); reset(); clearErrors() }}>Cancelar</SecondaryButton>
                                     </div>
-                                    <div>
-                                        <DangerButton>Eliminar</DangerButton>
-                                    </div>
+                                    <DeleteDialog todo={todo.id}/>
                                 </div>
                             </form>
                             :
