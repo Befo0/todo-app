@@ -5,7 +5,6 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import PrimaryButton from './PrimaryButton'
 import SecondaryButton from './SecondaryButton'
-import DangerButton from './DangerButton'
 import InputError from './InputError'
 import { Toaster, toast } from 'sonner'
 import DeleteDialog from './DeleteDialog'
@@ -70,12 +69,13 @@ export default function Todo({ todo }) {
                             <p className="mt-2 text-gray-900 text-start break-words">{todo.todo}</p>
                         </div>
                     )}
-                    <div className='flex ml-2 sm:flex-col justify-between items-end sm:items-start w-full sm:w-40 sm:max-w-40 mt-4 sm:mt-0'>
+                    <div className='flex ml-2 sm:flex-col justify-between items-end sm:items-end w-full sm:w-40 sm:max-w-40 mt-4 sm:mt-0'>
                         <button className='hover:bg-slate-50 rounded-lg p-1' onClick={() => setEditing(true)}>
                             <EditIcon />
                         </button>
                         <div className='text-sm text-gray-600 text-right sm:text-left'>
-                            <small>{dayjs(todo.created_at).fromNow()}</small>
+                            {todo.created_at === todo.updated_at && <small> Created &middot;</small>}
+                            <small> {dayjs(todo.created_at).fromNow()}</small>
                             {todo.created_at !== todo.updated_at && <small> &middot; edited</small>}
                         </div>
                     </div>

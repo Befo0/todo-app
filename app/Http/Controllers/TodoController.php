@@ -25,17 +25,19 @@ class TodoController extends Controller
     public function list(Request $request): Response
     {
         $userId = $request->user()->id;
-        $todos = todo::all()->where('user_id', $userId);
+        $todos = todo::where('user_id', $userId);
 
+        if ($request->state_id > 0 && $request->state_id < 3) {
+            $request->validate([
+                'state_id' => 'integer'
+            ]);
+
+            $todos = $todos->where('state_id', $request->state_id);
+        }
+
+        $todos = $todos->get();
 
         return Inertia::render('Todo/List', compact('todos'));
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -59,38 +61,24 @@ class TodoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(todo $todo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(todo $todo)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, todo $todo):RedirectResponse
+    public function update(Request $request, todo $todo): RedirectResponse
     {
         Gate::authorize('update', $todo);
 
-        $validated = $request->validate([
+        $rules = [
             'title' => 'required|string|max:100',
             'todo' => 'required|string|max:255',
-            'date' => [
-                'required',
-                'date',
-                'after_or_equal:' . now()->toDateString(),
-            ],
+            'date' => 'required|date',
             'state_id' => 'required|boolean',
-        ]);
+        ];
+
+        if (!$request['state_id']) {
+            $rules['date'] .= '|after_or_equal:' . now()->toDateString();
+        };
+
+        $validated = $request->validate($rules);
 
         $validated['state_id']  = $validated['state_id'] ? 2 : 1;
 
