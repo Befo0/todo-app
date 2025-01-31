@@ -24,17 +24,11 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                >
-                                    Dashboard
+                                <NavLink href={route('todos.list')} active={route().current('todos.list')}>
+                                    List of To Do's
                                 </NavLink>
                                 <NavLink href={route('todos.index')} active={route().current('todos.index')}>
                                     Create To Do
-                                </NavLink>
-                                <NavLink href={route('todos.list')} active={route().current('todos.list')}>
-                                    List of To Do's
                                 </NavLink>
                             </div>
                         </div>
@@ -134,17 +128,11 @@ export default function AuthenticatedLayout({ header, children }) {
                     }
                 >
                     <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            href={route('dashboard')}
-                            active={route().current('dashboard')}
-                        >
-                            Dashboard
+                        <ResponsiveNavLink href={route('todos.list')} active={route().current('todos.list')}>
+                            List of To Do's
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('todos.index')} active={route().current('todos.index')}>
                             Create To Do
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('todos.list')} active={route().current('todos.list')}>
-                            List of To Do's
                         </ResponsiveNavLink>
                     </div>
 

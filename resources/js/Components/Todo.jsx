@@ -37,46 +37,46 @@ export default function Todo({ todo }) {
     const [editing, setEditing] = useState(false)
 
     return (
-        <div className="p-6 flex space-x-2 w-full">
+        <div className="p-4 sm:p-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full">
             <Toaster richColors position='top-right' />
             <div className="flex-1">
-                <div className="flex justify-between">
-                    {
-                        editing
-                            ?
-                            <form action="" onSubmit={handleSubmit} className='w-full'>
-                                <div className='flex flex-col'>
-                                    <input type="text" value={data.title} onChange={(e) => setData('title', e.target.value)} className='mb-2 form-style' />
-                                    <InputError message={errors.title} className='mt-2' />
-                                    <textarea name="" id="" value={data.todo} onChange={(e) => setData('todo', e.target.value)} className='mb-2 form-style h-32 resize-none'></textarea>
-                                    <InputError message={errors.todo} className='mt-2' />
-                                </div>
-                                <label htmlFor="date">Cambiar fecha de recordatorio</label>
-                                <input type="datetime-local" id='date' value={data.date} onChange={(e) => setData('date', e.target.value)} className='mb-4 form-style ml-6' />
-                                <InputError message={errors.date} className='mt-2' />
-                                <label htmlFor="isFinished" className='ml-10'>Marcar como finalizado</label>
-                                <input type="checkbox" id='isFinished' className='ml-4 form-style' onClick={() => setData('state_id', !data.state_id)}/>
-                                <div className='flex justify-between'>
-                                    <div className='flex gap-x-4'>
-                                        <PrimaryButton type='submit'>Editar</PrimaryButton>
-                                        <SecondaryButton onClick={() => { setEditing(false); reset(); clearErrors() }}>Cancelar</SecondaryButton>
-                                    </div>
-                                    <DeleteDialog todo={todo.id}/>
-                                </div>
-                            </form>
-                            :
-                            <div className='max-w-[750px]'>
-                                <span className="text-gray-800">{todo.title}</span>
-                                <p className="mt-4 text-lg text-gray-900 text-start">{todo.todo}</p>
+                <div className="flex flex-col sm:flex-row sm:justify-between">
+                    {editing ? (
+                        <form onSubmit={handleSubmit} className='w-full'>
+                            <div className='flex flex-col'>
+                                <input type="text" value={data.title} onChange={(e) => setData('title', e.target.value)} className='mb-2 form-style' />
+                                <InputError message={errors.title} className='mt-2' />
+                                <textarea value={data.todo} onChange={(e) => setData('todo', e.target.value)} className='mb-2 form-style h-32 resize-none'></textarea>
+                                <InputError message={errors.todo} className='mt-2' />
                             </div>
-                    }
-                    <div className='flex flex-col justify-between items-end w-40 max-w-40'>
-                        <button className='hover:bg-slate-50 rounded-lg' onClick={() => setEditing(true)}>
+                            <label htmlFor="date" className="block mt-2">Cambiar fecha de recordatorio</label>
+                            <input type="datetime-local" id='date' value={data.date} onChange={(e) => setData('date', e.target.value)} className='mb-4 form-style' />
+                            <InputError message={errors.date} className='mt-2' />
+                            <div className='flex items-center gap-2 mt-2'>
+                                <label htmlFor="isFinished">Marcar como finalizado</label>
+                                <input type="checkbox" id='isFinished' className='form-style' onClick={() => setData('state_id', !data.state_id)} />
+                            </div>
+                            <div className='flex flex-col sm:flex-row sm:justify-between gap-4 mt-4'>
+                                <div className='flex gap-x-4'>
+                                    <PrimaryButton type='submit'>Editar</PrimaryButton>
+                                    <SecondaryButton onClick={() => { setEditing(false); reset(); clearErrors(); }}>Cancelar</SecondaryButton>
+                                </div>
+                                <DeleteDialog todo={todo.id} />
+                            </div>
+                        </form>
+                    ) : (
+                        <div className='max-w-full sm:max-w-[750px]'>
+                            <span className="text-gray-800 text-lg font-semibold break-words">{todo.title}</span>
+                            <p className="mt-2 text-gray-900 text-start break-words">{todo.todo}</p>
+                        </div>
+                    )}
+                    <div className='flex ml-2 sm:flex-col justify-between items-end sm:items-start w-full sm:w-40 sm:max-w-40 mt-4 sm:mt-0'>
+                        <button className='hover:bg-slate-50 rounded-lg p-1' onClick={() => setEditing(true)}>
                             <EditIcon />
                         </button>
-                        <div>
-                            <small className="text-sm text-gray-600">{dayjs(todo.created_at).fromNow()}</small>
-                            {todo.created_at !== todo.updated_at && <small className='text-sm text-gray-600'> &middot; edited</small>}
+                        <div className='text-sm text-gray-600 text-right sm:text-left'>
+                            <small>{dayjs(todo.created_at).fromNow()}</small>
+                            {todo.created_at !== todo.updated_at && <small> &middot; edited</small>}
                         </div>
                     </div>
                 </div>
